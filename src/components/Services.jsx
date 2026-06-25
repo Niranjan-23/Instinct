@@ -44,11 +44,11 @@ function TiltWrapper({ children, className }) {
 // Interactive Mockups built in React + CSS
 function FinanceDashboardMockup() {
   return (
-    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-white/5 rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between">
-      <div className="flex justify-between items-center border-b border-white/5 pb-3">
+    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-brand-border rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between transition-colors duration-500">
+      <div className="flex justify-between items-center border-b border-brand-border pb-3">
         <div>
-          <span className="text-[10px] text-white/40 uppercase tracking-widest block">Main Wallet</span>
-          <span className="text-xl md:text-2xl font-bold text-white">$142,580.40</span>
+          <span className="text-[10px] text-brand-text/40 uppercase tracking-widest block">Main Wallet</span>
+          <span className="text-xl md:text-2xl font-bold text-brand-text">$142,580.40</span>
         </div>
         <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-xs text-green-400">
           <TrendingUp className="w-3.5 h-3.5" />
@@ -80,13 +80,13 @@ function FinanceDashboardMockup() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between items-center text-xs bg-white/[0.02] border border-white/5 p-2 rounded-xl">
-          <span className="text-white/60">Stripe Invoices</span>
-          <span className="font-semibold text-white">+$4,290.00</span>
+        <div className="flex justify-between items-center text-xs bg-brand-text/[0.02] border border-brand-border p-2 rounded-xl">
+          <span className="text-brand-text/60">Stripe Invoices</span>
+          <span className="font-semibold text-brand-text">+$4,290.00</span>
         </div>
-        <div className="flex justify-between items-center text-xs bg-white/[0.02] border border-white/5 p-2 rounded-xl">
-          <span className="text-white/60">AWS Cloud Bill</span>
-          <span className="font-semibold text-white/50">-$1,105.80</span>
+        <div className="flex justify-between items-center text-xs bg-brand-text/[0.02] border border-brand-border p-2 rounded-xl">
+          <span className="text-brand-text/60">AWS Cloud Bill</span>
+          <span className="font-semibold text-brand-text/50">-$1,105.80</span>
         </div>
       </div>
     </div>
@@ -95,51 +95,51 @@ function FinanceDashboardMockup() {
 
 function CRMPipelineMockup() {
   return (
-    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-white/5 rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between">
-      <div className="flex justify-between items-center border-b border-white/5 pb-3">
+    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-brand-border rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between transition-colors duration-500">
+      <div className="flex justify-between items-center border-b border-brand-border pb-3">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-white">Leads Pipeline</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-brand-text">Leads Pipeline</span>
         </div>
-        <span className="text-[10px] text-white/30">Updated just now</span>
+        <span className="text-[10px] text-brand-text/30">Updated just now</span>
       </div>
 
       <div className="grid grid-cols-3 gap-3 my-4">
         {/* Deal Column 1 */}
         <div className="space-y-2">
-          <div className="text-[9px] uppercase tracking-wider text-white/40 mb-1">Proposal (2)</div>
-          <div className="bg-white/[0.02] border border-white/5 rounded-xl p-2.5 space-y-1">
-            <span className="text-[10px] font-bold text-white block truncate">Vortex Corp</span>
+          <div className="text-[9px] uppercase tracking-wider text-brand-text/40 mb-1">Proposal (2)</div>
+          <div className="bg-brand-text/[0.02] border border-brand-border rounded-xl p-2.5 space-y-1">
+            <span className="text-[10px] font-bold text-brand-text block truncate">Vortex Corp</span>
             <span className="text-[9px] text-brand-red font-semibold">$18,500</span>
           </div>
-          <div className="bg-white/[0.02] border border-white/5 rounded-xl p-2.5 space-y-1">
-            <span className="text-[10px] font-bold text-white block truncate">Hyperion Inc</span>
+          <div className="bg-brand-text/[0.02] border border-brand-border rounded-xl p-2.5 space-y-1">
+            <span className="text-[10px] font-bold text-brand-text block truncate">Hyperion Inc</span>
             <span className="text-[9px] text-brand-red font-semibold">$24,000</span>
           </div>
         </div>
 
         {/* Deal Column 2 */}
         <div className="space-y-2">
-          <div className="text-[9px] uppercase tracking-wider text-white/40 mb-1">Negotiating (1)</div>
-          <div className="bg-white/[0.03] border border-brand-red/20 rounded-xl p-2.5 space-y-1 shadow-[0_0_15px_rgba(255,32,32,0.05)]">
-            <span className="text-[10px] font-bold text-white block truncate">Aether Labs</span>
+          <div className="text-[9px] uppercase tracking-wider text-brand-text/40 mb-1">Negotiating (1)</div>
+          <div className="bg-brand-text/[0.03] border border-brand-red/20 rounded-xl p-2.5 space-y-1 shadow-[0_0_15px_rgba(255,32,32,0.05)]">
+            <span className="text-[10px] font-bold text-brand-text block truncate">Aether Labs</span>
             <span className="text-[9px] text-brand-red font-semibold">$45,000</span>
           </div>
         </div>
 
         {/* Deal Column 3 */}
         <div className="space-y-2">
-          <div className="text-[9px] uppercase tracking-wider text-white/40 mb-1">Won (3)</div>
+          <div className="text-[9px] uppercase tracking-wider text-brand-text/40 mb-1">Won (3)</div>
           <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-2.5 space-y-1">
-            <span className="text-[10px] font-bold text-white block truncate">Luminary Inc</span>
+            <span className="text-[10px] font-bold text-brand-text block truncate">Luminary Inc</span>
             <span className="text-[9px] text-green-400 font-semibold">$12,000</span>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-between items-center text-[10px] text-white/40 pt-2 border-t border-white/5">
+      <div className="flex justify-between items-center text-[10px] text-brand-text/40 pt-2 border-t border-brand-border">
         <span>Conversion Rate: 84%</span>
-        <span className="text-white/80">Monthly Target: $150k</span>
+        <span className="text-brand-text/80">Monthly Target: $150k</span>
       </div>
     </div>
   );
@@ -147,9 +147,9 @@ function CRMPipelineMockup() {
 
 function SEOAnalyticsMockup() {
   return (
-    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-white/5 rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between">
-      <div className="flex justify-between items-center border-b border-white/5 pb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-white">Geographic Search Domination</span>
+    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-brand-border rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between transition-colors duration-500">
+      <div className="flex justify-between items-center border-b border-brand-border pb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-brand-text">Geographic Search Domination</span>
         <Compass className="w-4 h-4 text-brand-red" />
       </div>
 
@@ -157,29 +157,29 @@ function SEOAnalyticsMockup() {
         {/* Geographic Dotted Map Representation */}
         <div className="absolute inset-0 opacity-10 flex flex-wrap justify-between content-between gap-1 py-4">
           {Array.from({ length: 48 }).map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white" />
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-brand-text" />
           ))}
         </div>
         
         {/* Glow Anchors */}
         <div className="absolute left-[30%] top-[40%] flex flex-col items-center">
           <div className="w-3 h-3 rounded-full bg-brand-red animate-ping absolute" />
-          <div className="w-3 h-3 rounded-full bg-brand-red border border-white relative z-10" />
-          <span className="text-[8px] mt-1 text-white bg-brand-bg px-1 rounded border border-white/10">64%</span>
+          <div className="w-3 h-3 rounded-full bg-brand-red border border-brand-text relative z-10" />
+          <span className="text-[8px] mt-1 text-brand-text bg-brand-bg px-1 rounded border border-brand-border">64%</span>
         </div>
         <div className="absolute right-[25%] top-[35%] flex flex-col items-center">
           <div className="w-2.5 h-2.5 rounded-full bg-brand-red/80 relative z-10" />
-          <span className="text-[8px] mt-1 text-white bg-brand-bg px-1 rounded border border-white/10">28%</span>
+          <span className="text-[8px] mt-1 text-brand-text bg-brand-bg px-1 rounded border border-brand-border">28%</span>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 text-xs">
-        <div className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center">
-          <span className="text-white/40 block text-[9px] uppercase">Search Visibility</span>
-          <span className="font-semibold text-white">92.4% (+4.2%)</span>
+        <div className="bg-brand-text/[0.02] border border-brand-border p-2 rounded-xl text-center">
+          <span className="text-brand-text/40 block text-[9px] uppercase">Search Visibility</span>
+          <span className="font-semibold text-brand-text">92.4% (+4.2%)</span>
         </div>
-        <div className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center">
-          <span className="text-white/40 block text-[9px] uppercase">Index Rate</span>
+        <div className="bg-brand-text/[0.02] border border-brand-border p-2 rounded-xl text-center">
+          <span className="text-brand-text/40 block text-[9px] uppercase">Index Rate</span>
           <span className="font-semibold text-brand-red">100% Fully Geo-optimized</span>
         </div>
       </div>
@@ -189,9 +189,9 @@ function SEOAnalyticsMockup() {
 
 function DesignSystemMockup() {
   return (
-    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-white/5 rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between">
-      <div className="flex justify-between items-center border-b border-white/5 pb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-white">Instinct Design Tokens</span>
+    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-brand-border rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between transition-colors duration-500">
+      <div className="flex justify-between items-center border-b border-brand-border pb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-brand-text">Instinct Design Tokens</span>
         <Calendar className="w-4 h-4 text-brand-red" />
       </div>
 
@@ -202,17 +202,17 @@ function DesignSystemMockup() {
             I
           </div>
           <div className="flex-1 space-y-1">
-            <div className="h-2 w-24 bg-white/20 rounded" />
-            <div className="h-1.5 w-40 bg-white/10 rounded" />
+            <div className="h-2 w-24 bg-brand-text/20 rounded" />
+            <div className="h-1.5 w-40 bg-brand-text/10 rounded" />
           </div>
         </div>
 
         {/* Buttons / Chips */}
         <div className="flex flex-wrap gap-2">
-          <span className="px-3 py-1 bg-white text-brand-bg font-semibold text-[10px] rounded-full">
+          <span className="px-3 py-1 bg-brand-text text-brand-bg font-semibold text-[10px] rounded-full">
             Active Button
           </span>
-          <span className="px-3 py-1 border border-white/10 text-white font-medium text-[10px] rounded-full hover:border-brand-red transition-colors duration-300">
+          <span className="px-3 py-1 border border-brand-border text-brand-text font-medium text-[10px] rounded-full hover:border-brand-red transition-colors duration-300">
             Secondary Outline
           </span>
           <span className="px-2 py-1 bg-brand-red/10 border border-brand-red/30 text-brand-red text-[9px] rounded-md font-bold uppercase tracking-wider">
@@ -221,7 +221,7 @@ function DesignSystemMockup() {
         </div>
 
         {/* Calendar Picker Layout snippet */}
-        <div className="grid grid-cols-7 gap-1 text-[8px] text-white/30 text-center">
+        <div className="grid grid-cols-7 gap-1 text-[8px] text-brand-text/30 text-center">
           <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
           <span>1</span><span>2</span><span>3</span>
           <span className="bg-brand-red text-white rounded-full font-bold">4</span>
@@ -229,7 +229,7 @@ function DesignSystemMockup() {
         </div>
       </div>
 
-      <span className="text-[9px] text-white/30 uppercase text-center block pt-2 border-t border-white/5">
+      <span className="text-[9px] text-brand-text/30 uppercase text-center block pt-2 border-t border-brand-border">
         Scale: Responsive Mobile & Desktop Layout Systems
       </span>
     </div>
@@ -238,11 +238,11 @@ function DesignSystemMockup() {
 
 function AIWorkspaceMockup() {
   return (
-    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-white/5 rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between">
-      <div className="flex justify-between items-center border-b border-white/5 pb-3">
+    <div className="w-full h-[260px] md:h-[320px] bg-brand-sec border border-brand-border rounded-2xl p-5 md:p-6 overflow-hidden flex flex-col justify-between transition-colors duration-500">
+      <div className="flex justify-between items-center border-b border-brand-border pb-3">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-brand-red" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-white">Cognitive Core Engine</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-brand-text">Cognitive Core Engine</span>
         </div>
         <span className="text-[9px] text-green-400 border border-green-500/20 bg-green-500/5 px-2 py-0.5 rounded-full font-medium">
           Idle
@@ -252,8 +252,8 @@ function AIWorkspaceMockup() {
       <div className="my-4 space-y-2.5">
         {/* Chat Prompt Mock */}
         <div className="space-y-1 flex flex-col items-end">
-          <span className="text-[8px] text-white/30 mr-1">User Query</span>
-          <div className="bg-white/5 border border-white/10 px-3 py-2 rounded-2xl rounded-tr-sm text-[10px] text-white/80 max-w-[85%]">
+          <span className="text-[8px] text-brand-text/30 mr-1">User Query</span>
+          <div className="bg-brand-text/5 border border-brand-border px-3 py-2 rounded-2xl rounded-tr-sm text-[10px] text-brand-text/80 max-w-[85%]">
             Optimize database queries and orchestrate multi-agent workflow.
           </div>
         </div>
@@ -261,7 +261,7 @@ function AIWorkspaceMockup() {
         {/* Chat Response Mock */}
         <div className="space-y-1 flex flex-col items-start">
           <span className="text-[8px] text-brand-red ml-1">Instinct AI</span>
-          <div className="bg-brand-red/10 border border-brand-red/20 px-3 py-2 rounded-2xl rounded-tl-sm text-[10px] text-white/90 max-w-[85%] flex gap-2">
+          <div className="bg-brand-red/10 border border-brand-red/20 px-3 py-2 rounded-2xl rounded-tl-sm text-[10px] text-brand-text max-w-[85%] flex gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-brand-red mt-1 animate-pulse" />
             <span>Structured queries parsed. Routing payload to Agent #04.</span>
           </div>
@@ -269,8 +269,8 @@ function AIWorkspaceMockup() {
       </div>
 
       {/* Prompt Bar */}
-      <div className="flex items-center border border-white/10 bg-white/[0.02] p-1.5 rounded-xl">
-        <span className="text-[9px] text-white/30 px-2 flex-1">Ask AI Agent...</span>
+      <div className="flex items-center border border-brand-border bg-brand-text/[0.02] p-1.5 rounded-xl">
+        <span className="text-[9px] text-brand-text/30 px-2 flex-1">Ask AI Agent...</span>
         <button className="px-3 py-1 bg-brand-red text-white text-[9px] font-bold rounded-lg shadow-[0_0_10px_rgba(255,32,32,0.3)]">
           Run
         </button>
@@ -321,7 +321,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative w-full py-24 md:py-32 bg-brand-bg text-white overflow-hidden border-b border-white/5"
+      className="relative w-full py-24 md:py-32 bg-brand-bg text-brand-text overflow-hidden border-b border-brand-border transition-colors duration-500"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
@@ -330,10 +330,10 @@ export default function Services() {
           <span className="text-xs uppercase tracking-[0.3em] text-brand-red font-semibold mb-3 block">
             02 // WHAT WE DELIVER
           </span>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 uppercase">
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-brand-text mb-6 uppercase">
             SERVICES
           </h2>
-          <p className="text-lg md:text-xl text-white/50 leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-brand-text/50 leading-relaxed font-light">
             We do not build templates. We craft custom premium solutions designed to convey authority, demonstrate design excellence, and drive operations.
           </p>
         </div>
@@ -358,16 +358,16 @@ export default function Services() {
                       {service.num}
                     </span>
                     <div className="h-[1px] w-8 bg-brand-red/30" />
-                    <span className="text-xs uppercase tracking-widest text-white/40">
+                    <span className="text-xs uppercase tracking-widest text-brand-text/40">
                       Capability
                     </span>
                   </div>
 
-                  <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-6 leading-tight hover:text-brand-red transition-colors duration-300">
+                  <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-text mb-6 leading-tight hover:text-brand-red transition-colors duration-300">
                     {service.title}
                   </h3>
 
-                  <p className="text-white/60 text-base leading-relaxed mb-8 font-light">
+                  <p className="text-brand-text/60 text-base leading-relaxed mb-8 font-light">
                     {service.desc}
                   </p>
 
@@ -376,7 +376,7 @@ export default function Services() {
                     {service.tech.map((tag) => (
                       <span 
                         key={tag}
-                        className="px-3.5 py-1.5 bg-brand-sec border border-white/5 rounded-full text-xs text-white/70 font-medium"
+                        className="px-3.5 py-1.5 bg-brand-sec border border-brand-border rounded-full text-xs text-brand-text/70 font-medium transition-colors duration-500"
                       >
                         {tag}
                       </span>
@@ -386,7 +386,7 @@ export default function Services() {
                   {/* Direct Link */}
                   <a 
                     href="#contact"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-brand-red transition-colors duration-300 group self-start"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-text/80 hover:text-brand-red transition-colors duration-300 group self-start"
                   >
                     <span>Inquire About This Service</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -405,12 +405,12 @@ export default function Services() {
                       <div className="absolute inset-0 bg-brand-red/5 rounded-3xl blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                       
                       {/* Mockup Frame Container */}
-                      <div className="relative z-10 bg-brand-sec/40 border border-white/5 rounded-3xl p-3 md:p-4 shadow-[0_30px_100px_rgba(0,0,0,0.8)] group-hover:border-brand-red/25 transition-colors duration-500">
+                      <div className="relative z-10 bg-brand-sec/40 border border-brand-border rounded-3xl p-3 md:p-4 shadow-xl dark:shadow-[0_30px_100px_rgba(0,0,0,0.8)] group-hover:border-brand-red/25 transition-all duration-500">
                         {/* Title Bar Details */}
-                        <div className="flex items-center gap-1.5 px-3 pb-3 border-b border-white/5 mb-3">
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                        <div className="flex items-center gap-1.5 px-3 pb-3 border-b border-brand-border mb-3">
+                          <div className="w-2.5 h-2.5 rounded-full bg-brand-text/10" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-brand-text/10" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-brand-text/10" />
                         </div>
                         {service.mockup}
                       </div>

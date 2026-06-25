@@ -49,7 +49,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-brand-bg text-white antialiased">
+    <div className="relative min-h-screen bg-brand-bg text-brand-text antialiased transition-colors duration-500">
       <Navbar />
       <Hero />
       <About />

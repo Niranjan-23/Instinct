@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <footer 
       id="contact" 
-      className="relative w-full py-24 md:py-32 bg-brand-sec overflow-hidden"
+      className="relative w-full py-24 md:py-32 bg-brand-sec overflow-hidden transition-colors duration-500"
     >
       {/* Background Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-red/10 rounded-full blur-[150px] pointer-events-none" />
@@ -65,7 +65,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-7xl font-extrabold tracking-tight text-white mb-10 max-w-3xl leading-tight text-glow"
+          className="text-4xl md:text-7xl font-extrabold tracking-tight text-brand-text mb-10 max-w-3xl leading-tight text-glow"
         >
           Let's Build Something Remarkable.
         </motion.h2>
@@ -94,24 +94,24 @@ export default function Contact() {
           <Mail className="w-4 h-4 text-brand-red" />
           <a 
             href="mailto:hello@instinct.com"
-            className="text-sm font-semibold tracking-wider text-white border-b border-transparent group-hover:border-brand-red transition-all duration-300"
+            className="text-sm font-semibold tracking-wider text-brand-text border-b border-transparent group-hover:border-brand-red transition-all duration-300"
           >
             hello@instinct.com
           </a>
         </motion.div>
 
         {/* Divider */}
-        <div className="w-full h-[1px] bg-white/5 my-16" />
+        <div className="w-full h-[1px] bg-brand-border my-16" />
 
         {/* Footer Bottom Block */}
         <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo & Copyright */}
           <div className="flex items-center gap-3">
-            <span className="text-sm font-bold tracking-widest text-white/50">
+            <span className="text-sm font-bold tracking-widest text-brand-text/50">
               INSTINCT
             </span>
-            <span className="text-white/20">|</span>
-            <span className="text-xs text-white/40">
+            <span className="text-brand-text/20">|</span>
+            <span className="text-xs text-brand-text/40">
               © {currentYear} Instinct. All rights reserved.
             </span>
           </div>
@@ -124,7 +124,7 @@ export default function Contact() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-white/5 flex items-center justify-center text-white/40 hover:text-brand-red hover:border-brand-red/30 bg-brand-bg/50 transition-all duration-300"
+                className="w-8 h-8 rounded-full border border-brand-border flex items-center justify-center text-brand-text/40 hover:text-brand-red hover:border-brand-red/30 bg-brand-bg/50 transition-all duration-300"
                 aria-label={link.name}
               >
                 {link.icon}

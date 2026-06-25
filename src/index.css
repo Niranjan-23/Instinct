@@ -1,12 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=general-sans@300,400,500,600,700&f[]=satoshi@300,400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-brand-bg: #050505;
-  --color-brand-sec: #0A0A0A;
-  --color-brand-red: #FF2020;
+:root {
+  --brand-bg: #050505;
+  --brand-sec: #0A0A0A;
+  --brand-red: #FF2020;
+  --brand-text: #FFFFFF;
+  --brand-text-muted: rgba(255, 255, 255, 0.7);
+  --brand-border: rgba(255, 255, 255, 0.05);
+  --brand-card-hover: rgba(10, 10, 10, 0.8);
+  --brand-nav-bg: rgba(5, 5, 5, 0.75);
+  --brand-scrollbar: #1f1f1f;
+  --brand-vignette: rgba(5, 5, 5, 0.9);
+  --brand-hero-brightness: brightness(0.25) saturate(0.8);
+  --brand-text-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  --brand-hero-overlay: linear-gradient(to top, var(--brand-bg), transparent, rgba(5, 5, 5, 0.4));
+  --brand-btn-shadow: rgba(255, 255, 255, 0.15);
+}
 
-  --font-sans: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+:root.light-theme {
+  --brand-bg: #F5F5F5;
+  --brand-sec: #EAEAEA;
+  --brand-red: #FF2020;
+  --brand-text: #050505;
+  --brand-text-muted: rgba(0, 0, 0, 0.75);
+  --brand-border: rgba(0, 0, 0, 0.08);
+  --brand-card-hover: rgba(234, 234, 234, 0.9);
+  --brand-nav-bg: rgba(245, 245, 245, 0.8);
+  --brand-scrollbar: #cccccc;
+  --brand-vignette: rgba(245, 245, 245, 0.25);
+  --brand-hero-brightness: brightness(0.85) contrast(1.15) saturate(0.7) opacity(0.75);
+  --brand-text-glow: none;
+  --brand-hero-overlay: linear-gradient(to top, var(--brand-bg) 0%, rgba(245, 245, 245, 0.15) 50%, rgba(245, 245, 245, 0.2) 100%);
+  --brand-btn-shadow: rgba(0, 0, 0, 0.15);
+}
+
+@theme {
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-sec: var(--brand-sec);
+  --color-brand-red: var(--brand-red);
+  --color-brand-text: var(--brand-text);
+  --color-brand-text-muted: var(--brand-text-muted);
+  --color-brand-border: var(--brand-border);
+  --color-brand-card-hover: var(--brand-card-hover);
+  --color-brand-nav-bg: var(--brand-nav-bg);
+
+  --font-sans: 'General Sans', 'Satoshi', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Clash Display', 'General Sans', 'Satoshi', 'Neue Montreal', 'Inter', sans-serif;
 }
 
 /* Custom Scrollbar */
@@ -15,11 +56,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--brand-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1f1f1f;
+  background: var(--brand-scrollbar);
   border-radius: 4px;
 }
 
@@ -30,15 +71,16 @@
 /* Custom Reset and Scroll Behavior */
 html,
 body {
-  background-color: #050505;
-  color: #FFFFFF;
+  background-color: var(--brand-bg);
+  color: var(--brand-text);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: 'Outfit', 'Inter', sans-serif;
+  font-family: 'General Sans', 'Satoshi', 'Inter', sans-serif;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Root sizing fix to reset boilerplate centered constraints */
@@ -76,15 +118,15 @@ html.lenis body {
 
 /* Premium Vignette Overlay */
 .vignette-overlay {
-  background: radial-gradient(circle, transparent 20%, rgba(5, 5, 5, 0.9) 80%);
+  background: radial-gradient(circle, transparent 20%, var(--brand-vignette) 80%);
 }
 
 /* Glassmorphism for Navbar */
 .glass-nav {
-  background: rgba(5, 5, 5, 0.75);
+  background: var(--brand-nav-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--brand-border);
 }
 
 /* Soft Eye Glow Effect */
@@ -99,18 +141,18 @@ html.lenis body {
 
 /* Premium Card / Showcase Hover Utilities */
 .card-hover-border {
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--brand-border);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-hover-border:hover {
   border-color: rgba(255, 32, 32, 0.25);
-  background: rgba(10, 10, 10, 0.8);
+  background: var(--brand-card-hover);
 }
 
 /* Text glow for high-impact titles */
 .text-glow {
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  text-shadow: var(--brand-text-glow);
 }
 
 /* Hide scrollbar utility */
