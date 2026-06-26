@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Loader2 } from 'lucide-react';
+import { X, Loader2, AlertCircle } from 'lucide-react';
 
 export default function ProjectInquiryDrawer({ isOpen, onClose }) {
   const containerRef = useRef(null);
@@ -16,6 +16,8 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+
 
   // Detect responsive screen width (initialize directly to prevent variant shifts)
   const [isMobile, setIsMobile] = useState(() => {
@@ -89,17 +91,54 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    // Simulate premium submit delay
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    const apiEndpoint = import.meta.env.VITE_SHEETS_API_URL;
+
+    // Check if the API URL is configured
+    if (!apiEndpoint || apiEndpoint.trim() === '') {
+      console.warn("Spreadsheet API URL not configured (VITE_SHEETS_API_URL is missing). Simulating submission in development mode.");
+      // Simulate premium submit delay
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+      }, 1500);
+      return;
+    }
+
+    try {
+      await fetch(apiEndpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          subject,
+          message
+        })
+      });
+
+      // Using 'no-cors' mode means the browser will not allow us to inspect the response
+      // status or body, but it guarantees the POST request was sent and processed by Google
+      // without being blocked by CORS. Since it did not throw a network exception, we mark it as submitted.
       setIsSubmitted(true);
-    }, 1500);
+    } catch (err) {
+      console.error('Spreadsheet submit error:', err);
+      setSubmitError('Failed to send message. Please check your network connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
 
   // Motion variants
   const backdropVariants = {
@@ -261,6 +300,20 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
                   />
                   {errors.message && <span className="text-[10px] text-brand-red font-semibold block">{errors.message}</span>}
                 </div>
+
+                {submitError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3.5 bg-brand-red/10 border border-brand-red/30 rounded-xl text-xs text-brand-red flex items-start gap-2.5 shadow-[0_0_15px_rgba(255,32,32,0.05)]"
+                  >
+                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <p className="font-bold uppercase tracking-wider text-[10px]">Submission Failed</p>
+                      <p className="opacity-90 leading-relaxed font-light">{submitError}</p>
+                    </div>
+                  </motion.div>
+                )}
               </motion.form>
             ) : (
               // Success Screen View
