@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import heroBg from '../assets/hero.avif';
 import SplitText from './SplitText';
 
-export default function Hero() {
+export default function Hero({ introCompleted }) {
   const containerRef = useRef(null);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -89,7 +89,7 @@ export default function Hero() {
       {/* Background Image with Scroll Zoom Parallax */}
       <motion.div
         initial="hidden"
-        animate="visible"
+        animate={introCompleted ? "visible" : "hidden"}
         variants={bgVariants}
         className="absolute inset-0 w-full h-full origin-center"
       >
@@ -131,13 +131,14 @@ export default function Hero() {
             textAlign="center"
             onLetterAnimationComplete={handleAnimationComplete}
             showCallback
+            introCompleted={introCompleted}
           />
         </div>
 
         {/* Supporting Text */}
         <motion.p
           initial="hidden"
-          animate="visible"
+          animate={introCompleted ? "visible" : "hidden"}
           variants={supportingVariants}
           className="text-xs sm:text-sm md:text-base font-medium text-brand-text-muted mb-12 tracking-[0.2em] uppercase"
         >
@@ -149,7 +150,7 @@ export default function Hero() {
           {/* Primary CTA */}
           <motion.div
             initial="hidden"
-            animate="visible"
+            animate={introCompleted ? "visible" : "hidden"}
             variants={primaryBtnVariants}
             className="w-full sm:w-auto"
           >
@@ -164,7 +165,7 @@ export default function Hero() {
           {/* Secondary CTA */}
           <motion.div
             initial="hidden"
-            animate="visible"
+            animate={introCompleted ? "visible" : "hidden"}
             variants={secondaryBtnVariants}
             className="w-full sm:w-auto"
           >
@@ -182,7 +183,7 @@ export default function Hero() {
       <motion.a
         href="#about"
         initial="hidden"
-        animate="visible"
+        animate={introCompleted ? "visible" : "hidden"}
         variants={scrollIndicatorVariants}
         className="absolute bottom-10 z-10 flex flex-col items-center gap-2 cursor-pointer group"
       >

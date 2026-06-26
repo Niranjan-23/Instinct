@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight } from 'lucide-react';
 
-export default function Contact() {
+export default function Contact({ onOpenInquiry }) {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -56,7 +56,7 @@ export default function Contact() {
         
         {/* Section Header */}
         <span className="text-xs uppercase tracking-[0.3em] text-brand-red font-semibold mb-4 block">
-          03 // REWORK THE FUTURE
+          03 REWORK THE FUTURE
         </span>
 
         {/* Large Headline */}
@@ -71,17 +71,17 @@ export default function Contact() {
         </motion.h2>
 
         {/* Start a Project Button */}
-        <motion.a
-          href="mailto:hello@instinct.com"
+        <motion.button
+          onClick={onOpenInquiry}
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative inline-flex items-center gap-3 px-8 py-4 bg-brand-red text-white text-base font-bold rounded-full overflow-hidden group shadow-[0_0_20px_rgba(255,32,32,0.3)] hover:shadow-[0_0_30px_rgba(255,32,32,0.6)] hover:scale-105 transition-all duration-300"
+          className="relative inline-flex items-center gap-3 px-8 py-4 bg-brand-red text-white text-base font-bold rounded-full overflow-hidden group shadow-[0_0_20px_rgba(255,32,32,0.3)] hover:shadow-[0_0_30px_rgba(255,32,32,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer"
         >
           <span>Start a Project</span>
           <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-        </motion.a>
+        </motion.button>
 
         {/* Email Address */}
         <motion.div 

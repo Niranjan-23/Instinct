@@ -43,7 +43,7 @@ export default function Navbar() {
   const currentLogo = theme === 'light' ? logoLightImg : logoImg;
 
   const navLinks = [
-    { name: 'About', href: '#about' },
+    { name: 'Instinct', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Contact', href: '#contact' }
   ];

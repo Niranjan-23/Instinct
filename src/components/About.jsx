@@ -1,156 +1,257 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Users, Globe, Cpu, Search, Sparkles } from 'lucide-react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-function AnimatedCounter({ value, duration = 1.5 }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+gsap.registerPlugin(ScrollTrigger);
 
-  useEffect(() => {
-    if (isInView) {
-      let start = 0;
-      const end = parseInt(value, 10);
-      if (start === end) {
-        setCount(end);
-        return;
-      }
+export default function About({ introCompleted }) {
+  const wrapperRef = useRef(null);
+  const pinRef = useRef(null);
+  const slideRefs = useRef([]);
 
-      const totalMiliseconds = duration * 1000;
-      const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 20);
+  useGSAP(() => {
+    if (!introCompleted) return;
 
-      const timer = setInterval(() => {
-        start += 1;
-        setCount(start);
-        if (start === end) clearInterval(timer);
-      }, incrementTime);
+    const slides = slideRefs.current;
+    if (!slides.length) return;
 
-      return () => clearInterval(timer);
-    }
-  }, [isInView, value, duration]);
+    // Create a scroll-pinned timeline for the storytelling sequence
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+        pin: pinRef.current,
+        anticipatePin: 1,
+      },
+    });
 
-  return <span ref={ref}>{count}</span>;
-}
+    // Pause briefly at the start of the first screen (Intro)
+    tl.to({}, { duration: 1.5 });
 
-export default function About() {
-  const sectionRef = useRef(null);
-  const headerRef = useRef(null);
+    // Slide 0 (Intro) -> Slide 1 (Learn)
+    tl.to(slides[0], {
+      x: '-35%',
+      opacity: 0,
+      scale: 0.96,
+      duration: 2.0,
+      ease: 'power2.inOut',
+    });
+    tl.fromTo(
+      slides[1],
+      { x: '100%', opacity: 0, scale: 0.98 },
+      { x: '0%', opacity: 1, scale: 1, duration: 2.0, ease: 'power2.inOut' },
+      '<'
+    );
+    // Pause on Slide 1
+    tl.to({}, { duration: 1.5 });
 
-  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
+    // Slide 1 (Learn) -> Slide 2 (Build)
+    tl.to(slides[1], {
+      x: '-35%',
+      opacity: 0,
+      scale: 0.96,
+      duration: 2.0,
+      ease: 'power2.inOut',
+    });
+    tl.fromTo(
+      slides[2],
+      { x: '100%', opacity: 0, scale: 0.98 },
+      { x: '0%', opacity: 1, scale: 1, duration: 2.0, ease: 'power2.inOut' },
+      '<'
+    );
+    // Pause on Slide 2
+    tl.to({}, { duration: 1.5 });
 
-  const capabilities = [
-    {
-      icon: <Globe className="w-6 h-6 text-brand-red" />,
-      title: 'Website Development',
-      desc: 'High-performance interactive interfaces, tailored for maximum user engagement.'
-    },
-    {
-      icon: <Cpu className="w-6 h-6 text-brand-red" />,
-      title: 'Backend Systems',
-      desc: 'Robust architectures, database engineering, and secure API structures built to scale.'
-    },
-    {
-      icon: <Search className="w-6 h-6 text-brand-red" />,
-      title: 'SEO & GEO',
-      desc: 'Modern search engine optimization and geographical localization strategies.'
-    },
-    {
-      icon: <Sparkles className="w-6 h-6 text-brand-red" />,
-      title: 'AI Integration',
-      desc: 'Injecting intelligence into products using custom LLMs and advanced cognitive workflows.'
-    }
-  ];
+    // Slide 2 (Build) -> Slide 3 (Improve)
+    tl.to(slides[2], {
+      x: '-35%',
+      opacity: 0,
+      scale: 0.96,
+      duration: 2.0,
+      ease: 'power2.inOut',
+    });
+    tl.fromTo(
+      slides[3],
+      { x: '100%', opacity: 0, scale: 0.98 },
+      { x: '0%', opacity: 1, scale: 1, duration: 2.0, ease: 'power2.inOut' },
+      '<'
+    );
+    // Pause on Slide 3
+    tl.to({}, { duration: 1.5 });
+
+    // Slide 3 (Improve) -> Slide 4 (Deliver)
+    tl.to(slides[3], {
+      x: '-35%',
+      opacity: 0,
+      scale: 0.96,
+      duration: 2.0,
+      ease: 'power2.inOut',
+    });
+    tl.fromTo(
+      slides[4],
+      { x: '100%', opacity: 0, scale: 0.98 },
+      { x: '0%', opacity: 1, scale: 1, duration: 2.0, ease: 'power2.inOut' },
+      '<'
+    );
+    // Pause on Slide 4
+    tl.to({}, { duration: 1.5 });
+
+    // Slide 4 (Deliver) -> Slide 5 (Grow)
+    tl.to(slides[4], {
+      x: '-35%',
+      opacity: 0,
+      scale: 0.96,
+      duration: 2.0,
+      ease: 'power2.inOut',
+    });
+    tl.fromTo(
+      slides[5],
+      { x: '100%', opacity: 0, scale: 0.98 },
+      { x: '0%', opacity: 1, scale: 1, duration: 2.0, ease: 'power2.inOut' },
+      '<'
+    );
+
+    // Pause briefly after the final statement has appeared before releasing pin
+    tl.to({}, { duration: 2.5 });
+  }, { scope: wrapperRef, dependencies: [introCompleted] });
 
   return (
-    <section
+    <div
+      ref={wrapperRef}
       id="about"
-      ref={sectionRef}
-      className="relative w-full min-h-screen py-24 md:py-32 bg-brand-sec flex flex-col justify-center overflow-hidden border-b border-brand-border transition-colors duration-500"
+      className="relative w-full h-[700vh] bg-brand-bg transition-colors duration-500 z-30"
     >
-      {/* Background Decorative Accents */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand-red/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-brand-red/5 rounded-full blur-[150px] pointer-events-none" />
+      <div
+        ref={pinRef}
+        className="sticky top-0 w-full h-screen overflow-hidden bg-brand-bg transition-colors duration-500 flex items-center justify-center"
+      >
+        {/* Subtle high-contrast radial overlay for premium feel */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,32,32,0.02)_0%,transparent_75%)]" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
-        {/* Section Header */}
-        <div ref={headerRef} className="max-w-3xl mb-20 md:mb-28">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="text-xs uppercase tracking-[0.3em] text-brand-red font-semibold mb-3 block">
-              01 // WHO WE ARE
+        {/* Slide 0: Intro */}
+        <div
+          ref={(el) => (slideRefs.current[0] = el)}
+          className="absolute inset-0 w-full h-full flex flex-col justify-center items-center px-6 md:px-12 text-center"
+        >
+          <div className="max-w-5xl mx-auto flex flex-col items-center">
+            <span className="text-brand-red text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase mb-6 select-none">
+              INSTINCT PHILOSOPHY
             </span>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-brand-text mb-6 uppercase">
-              ABOUT
+            <h2 className="font-display text-6xl sm:text-8xl md:text-[6.5rem] lg:text-[8rem] xl:text-[9.5rem] font-black tracking-tight text-brand-text mb-8 leading-none select-none uppercase transition-colors duration-500">
+              OUR INSTINCT
             </h2>
-            <p className="text-2xl md:text-4xl text-brand-text/80 font-light leading-snug">
-              We turn ideas into digital solutions.
-            </p>
-          </motion.div>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-lg sm:text-xl md:text-2xl tracking-[0.2em] uppercase font-light">
+              <span className="text-brand-red font-medium">Built by curiosity.</span>
+              <span className="hidden sm:inline text-brand-text/30 select-none transition-colors duration-500">•</span>
+              <span className="text-brand-text/60 transition-colors duration-500">Driven by creation.</span>
+            </div>
+          </div>
         </div>
 
-        {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Big Stat Column (4 Cols) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 bg-brand-bg/50 border border-brand-border rounded-3xl p-10 md:p-12 flex flex-col justify-between h-full min-h-[350px] group hover:border-brand-red/20 transition-all duration-500"
-          >
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-brand-red/10 flex items-center justify-center mb-8 border border-brand-red/20">
-                <Users className="w-6 h-6 text-brand-red" />
-              </div>
-              <h3 className="text-lg font-medium text-brand-text/60 tracking-wider uppercase mb-2">
-                Collective Expertise
-              </h3>
-              <p className="text-brand-text/40 text-sm leading-relaxed max-w-sm">
-                A tight-knit force of designers, engineers, and product minds crafting industry-defining software.
-              </p>
-            </div>
+        {/* Slide 1: Learn */}
+        <div
+          ref={(el) => (slideRefs.current[1] = el)}
+          className="absolute inset-0 w-full h-full flex flex-col justify-center px-6 md:px-24 lg:px-32 bg-brand-bg transition-colors duration-500 opacity-0"
+          style={{ transform: 'translateX(100%) scale(0.98)' }}
+        >
+          <div className="max-w-5xl mx-auto w-full">
+            <span className="text-brand-red text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase mb-6 block select-none">
+              01 VISION
+            </span>
+            <h3 className="font-display text-7xl sm:text-[6rem] md:text-[8.5rem] lg:text-[10rem] font-black mb-8 text-brand-text tracking-tight uppercase leading-none select-none transition-colors duration-500">
+              Learn.
+            </h3>
+            <div className="h-[2px] w-24 bg-brand-red mb-10" />
+            <p className="text-3xl sm:text-5xl md:text-6xl text-brand-text/90 font-light leading-snug tracking-tight max-w-4xl transition-colors duration-500">
+              Technology never stands still.
+              <span className="block mt-4 text-brand-text/40 font-normal transition-colors duration-500">Neither do we.</span>
+            </p>
+          </div>
+        </div>
 
-            <div className="mt-12 flex items-baseline">
-              <span className="text-7xl md:text-8xl font-bold tracking-tight text-brand-text select-none">
-                <AnimatedCounter value="8" />
-              </span>
-              <span className="text-5xl md:text-6xl font-bold text-brand-red select-none">+</span>
-              <span className="ml-4 text-sm font-semibold tracking-widest text-brand-text/50 uppercase">
-                Team Members
-              </span>
-            </div>
-          </motion.div>
+        {/* Slide 2: Build */}
+        <div
+          ref={(el) => (slideRefs.current[2] = el)}
+          className="absolute inset-0 w-full h-full flex flex-col justify-center px-6 md:px-24 lg:px-32 bg-brand-bg transition-colors duration-500 opacity-0"
+          style={{ transform: 'translateX(100%) scale(0.98)' }}
+        >
+          <div className="max-w-5xl mx-auto w-full">
+            <span className="text-brand-red text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase mb-6 block select-none">
+              02 ACTION
+            </span>
+            <h3 className="font-display text-7xl sm:text-[6rem] md:text-[8.5rem] lg:text-[10rem] font-black mb-8 text-brand-text tracking-tight uppercase leading-none select-none transition-colors duration-500">
+              Build.
+            </h3>
+            <div className="h-[2px] w-24 bg-brand-red mb-10" />
+            <p className="text-3xl sm:text-5xl md:text-6xl text-brand-text/90 font-light leading-snug tracking-tight max-w-4xl transition-colors duration-500">
+              Ideas deserve <span className="text-brand-red font-medium">execution.</span>
+            </p>
+          </div>
+        </div>
 
-          {/* Capabilities Grid (7 Cols) */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {capabilities.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-brand-bg/30 border border-brand-border rounded-2xl p-8 hover:bg-brand-bg/75 hover:border-brand-red/10 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-brand-text/5 flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-brand-red/10 group-hover:scale-105">
-                    {item.icon}
-                  </div>
-                  <h4 className="text-xl font-bold text-brand-text mb-3">
-                    {item.title}
-                  </h4>
-                </div>
-                <p className="text-brand-text/60 text-sm leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
+        {/* Slide 3: Improve */}
+        <div
+          ref={(el) => (slideRefs.current[3] = el)}
+          className="absolute inset-0 w-full h-full flex flex-col justify-center px-6 md:px-24 lg:px-32 bg-brand-bg transition-colors duration-500 opacity-0"
+          style={{ transform: 'translateX(100%) scale(0.98)' }}
+        >
+          <div className="max-w-5xl mx-auto w-full">
+            <span className="text-brand-red text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase mb-6 block select-none">
+              03 EVOLUTION
+            </span>
+            <h3 className="font-display text-7xl sm:text-[6rem] md:text-[8.5rem] lg:text-[10rem] font-black mb-8 text-brand-text tracking-tight uppercase leading-none select-none transition-colors duration-500">
+              Improve.
+            </h3>
+            <div className="h-[2px] w-24 bg-brand-red mb-10" />
+            <p className="text-3xl sm:text-5xl md:text-6xl text-brand-text/90 font-light leading-snug tracking-tight max-w-4xl transition-colors duration-500">
+              Every project is an <span className="text-brand-text font-normal underline decoration-brand-red decoration-2 underline-offset-[12px] transition-colors duration-500">opportunity</span> to do better.
+            </p>
+          </div>
+        </div>
+
+        {/* Slide 4: Deliver */}
+        <div
+          ref={(el) => (slideRefs.current[4] = el)}
+          className="absolute inset-0 w-full h-full flex flex-col justify-center px-6 md:px-24 lg:px-32 bg-brand-bg transition-colors duration-500 opacity-0"
+          style={{ transform: 'translateX(100%) scale(0.98)' }}
+        >
+          <div className="max-w-5xl mx-auto w-full">
+            <span className="text-brand-red text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase mb-6 block select-none">
+              04 REALIZE
+            </span>
+            <h3 className="font-display text-7xl sm:text-[6rem] md:text-[8.5rem] lg:text-[10rem] font-black mb-8 text-brand-text tracking-tight uppercase leading-none select-none transition-colors duration-500">
+              Deliver.
+            </h3>
+            <div className="h-[2px] w-24 bg-brand-red mb-10" />
+            <p className="text-3xl sm:text-5xl md:text-6xl text-brand-text/90 font-light leading-snug tracking-tight max-w-4xl transition-colors duration-500">
+              Solutions built with <span className="text-brand-red font-medium">purpose.</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Slide 5: Grow */}
+        <div
+          ref={(el) => (slideRefs.current[5] = el)}
+          className="absolute inset-0 w-full h-full flex flex-col justify-center px-6 md:px-24 lg:px-32 bg-brand-bg transition-colors duration-500 opacity-0"
+          style={{ transform: 'translateX(100%) scale(0.98)' }}
+        >
+          <div className="max-w-5xl mx-auto w-full">
+            <span className="text-brand-red text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase mb-6 block select-none">
+              05 PARTNERSHIP
+            </span>
+            <h3 className="font-display text-7xl sm:text-[6rem] md:text-[8.5rem] lg:text-[10rem] font-black mb-8 text-brand-text tracking-tight uppercase leading-none select-none transition-colors duration-500">
+              Grow.
+            </h3>
+            <div className="h-[2px] w-24 bg-brand-red mb-10" />
+            <p className="text-3xl sm:text-5xl md:text-6xl text-brand-text/90 font-light leading-snug tracking-tight max-w-4xl transition-colors duration-500">
+              Success is built <span className="text-brand-text font-medium italic transition-colors duration-500">together.</span>
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

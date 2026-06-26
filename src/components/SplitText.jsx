@@ -19,6 +19,7 @@ export default function SplitText({
   textAlign = "center",
   onLetterAnimationComplete,
   showCallback = false,
+  introCompleted = true,
 }) {
   const containerRef = useRef(null);
   const [inView, setInView] = useState(false);
@@ -47,7 +48,7 @@ export default function SplitText({
 
   // GSAP animation
   useGSAP(() => {
-    if (!inView) return;
+    if (!inView || !introCompleted) return;
 
     const targets = containerRef.current.querySelectorAll('.split-item');
     if (!targets.length) return;
@@ -70,7 +71,7 @@ export default function SplitText({
         },
       }
     );
-  }, { scope: containerRef, dependencies: [inView] });
+  }, { scope: containerRef, dependencies: [inView, introCompleted] });
 
   return (
     <span
