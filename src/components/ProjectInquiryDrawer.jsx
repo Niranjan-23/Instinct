@@ -47,15 +47,12 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
   // Disable background scrolling when open
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add('no-scroll');
-      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('drawer-open-lock');
     } else {
-      document.body.classList.remove('no-scroll');
-      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('drawer-open-lock');
     }
     return () => {
-      document.body.classList.remove('no-scroll');
-      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('drawer-open-lock');
     };
   }, [isOpen]);
 

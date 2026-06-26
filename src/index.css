@@ -173,6 +173,11 @@ html.lenis body {
   touch-action: none;
 }
 
+/* Scroll lock specifically for drawers/panels to avoid resetting scroll position */
+.drawer-open-lock {
+  overflow: hidden !important;
+}
+
 /* Fullscreen Mobile Video Loader container */
 .intro-loader-container {
   position: fixed !important;

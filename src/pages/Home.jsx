@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -10,12 +10,14 @@ import Services from '../components/Services';
 import Contact from '../components/Contact';
 import IntroLoader from '../components/IntroLoader';
 import ProjectInquiryDrawer from '../components/ProjectInquiryDrawer';
+import FloatingContact from '../components/FloatingContact';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [introCompleted, setIntroCompleted] = useState(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
+  const lenisRef = useRef(null);
 
   // Manage body scroll locking during the intro video playback
   useEffect(() => {
@@ -32,6 +34,16 @@ export default function Home() {
     };
   }, [introCompleted]);
 
+  // Pause/Resume Lenis smooth scrolling when inquiry drawer toggles
+  useEffect(() => {
+    if (!lenisRef.current) return;
+    if (isInquiryOpen) {
+      lenisRef.current.stop();
+    } else {
+      lenisRef.current.start();
+    }
+  }, [isInquiryOpen]);
+
   // Initialize scroll systems (Lenis & ScrollTrigger) only after intro ends
   useEffect(() => {
     if (!introCompleted) return;
@@ -45,6 +57,7 @@ export default function Home() {
       touchMultiplier: 1.5,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     // Update ScrollTrigger on scroll
     lenis.on('scroll', ScrollTrigger.update);
@@ -80,6 +93,7 @@ export default function Home() {
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
       document.removeEventListener('click', handleAnchorClick);
       clearTimeout(refreshTimer);
     };
@@ -103,6 +117,7 @@ export default function Home() {
           <About introCompleted={introCompleted} />
           <Services introCompleted={introCompleted} />
           <Contact introCompleted={introCompleted} onOpenInquiry={() => setIsInquiryOpen(true)} />
+          <FloatingContact />
         </motion.div>
       )}
 
