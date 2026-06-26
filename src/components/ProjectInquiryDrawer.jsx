@@ -119,7 +119,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
     : { ease: [0.16, 1, 0.3, 1], duration: 0.45 };
 
   return (
-    <div className="fixed inset-0 z-[999999] flex justify-end items-end md:items-stretch overflow-hidden select-none pointer-events-auto">
+    <div className="fixed inset-0 z-[999999] flex justify-end items-end md:items-stretch overflow-hidden pointer-events-auto">
       {/* Backdrop overlay */}
       <motion.div
         initial="hidden"
@@ -146,7 +146,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
             onClose();
           }
         }}
-        className="relative z-20 w-full h-[90dvh] md:h-full md:max-w-xl bg-brand-sec border-t md:border-t-0 md:border-l border-brand-border backdrop-blur-2xl flex flex-col md:rounded-l-[28px] rounded-t-[28px] shadow-[0_-15px_50px_rgba(0,0,0,0.5)] overflow-hidden"
+        className="relative z-20 w-full h-[94dvh] md:h-full md:max-w-xl bg-brand-sec border-t md:border-t-0 md:border-l border-brand-border backdrop-blur-2xl flex flex-col md:rounded-l-[28px] rounded-t-[24px] md:rounded-t-0 shadow-[0_-15px_50px_rgba(0,0,0,0.5)] overflow-hidden"
       >
         {/* Mobile Swipe Bar Indicator */}
         {isMobile && (
@@ -156,7 +156,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
         )}
 
         {/* Drawer Header (Sticky) */}
-        <div className="px-6 py-5 border-b border-brand-border flex items-center justify-between shrink-0 bg-brand-sec z-10">
+        <div className="px-5 py-4 md:px-6 md:py-5 border-b border-brand-border flex items-center justify-between shrink-0 bg-brand-sec z-10">
           <div>
             <h2 className="text-xl md:text-2xl font-extrabold text-brand-text tracking-tight uppercase leading-none">
               Let's Build Something Amazing
@@ -175,7 +175,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
         </div>
 
         {/* Scrollable Form Body */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6 scrollbar-thin select-text">
+        <div className="flex-1 overflow-y-auto px-5 py-5 md:px-8 md:py-6 space-y-4 md:space-y-6 scrollbar-thin">
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
               <motion.form
@@ -195,7 +195,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
                       setName(e.target.value);
                       if (errors.name) setErrors(prev => ({ ...prev, name: '' }));
                     }}
-                    className={`w-full min-h-[48px] bg-brand-bg/60 border ${errors.name ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
+                    className={`w-full min-h-[44px] md:min-h-[48px] bg-brand-bg/60 border ${errors.name ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2 md:py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
                     placeholder="John Doe"
                   />
                   {errors.name && <span className="text-[10px] text-brand-red font-semibold block">{errors.name}</span>}
@@ -211,7 +211,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
                       setEmail(e.target.value);
                       if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
                     }}
-                    className={`w-full min-h-[48px] bg-brand-bg/60 border ${errors.email ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
+                    className={`w-full min-h-[44px] md:min-h-[48px] bg-brand-bg/60 border ${errors.email ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2 md:py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
                     placeholder="john@example.com"
                   />
                   {errors.email && <span className="text-[10px] text-brand-red font-semibold block">{errors.email}</span>}
@@ -227,7 +227,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
                       setPhone(e.target.value);
                       if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));
                     }}
-                    className={`w-full min-h-[48px] bg-brand-bg/60 border ${errors.phone ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
+                    className={`w-full min-h-[44px] md:min-h-[48px] bg-brand-bg/60 border ${errors.phone ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2 md:py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
                     placeholder="+1 (234) 567-8900"
                   />
                   {errors.phone && <span className="text-[10px] text-brand-red font-semibold block">{errors.phone}</span>}
@@ -243,7 +243,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
                       setSubject(e.target.value);
                       if (errors.subject) setErrors(prev => ({ ...prev, subject: '' }));
                     }}
-                    className={`w-full min-h-[48px] bg-brand-bg/60 border ${errors.subject ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
+                    className={`w-full min-h-[44px] md:min-h-[48px] bg-brand-bg/60 border ${errors.subject ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 py-2 md:py-2.5 text-sm text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner`}
                     placeholder="e.g. Redesign Project / Website Consulting"
                   />
                   {errors.subject && <span className="text-[10px] text-brand-red font-semibold block">{errors.subject}</span>}
@@ -316,7 +316,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
 
         {/* Sticky Footer (only show if not submitted) */}
         {!isSubmitted && (
-          <div className="px-6 py-4 border-t border-brand-border bg-brand-sec flex items-center justify-between gap-4 shrink-0 z-10 sticky bottom-0">
+          <div className="px-5 py-4 md:px-6 md:py-4 border-t border-brand-border bg-brand-sec flex items-center justify-between gap-4 shrink-0 z-10 sticky bottom-0">
             {/* Cancel Button */}
             <button
               type="button"

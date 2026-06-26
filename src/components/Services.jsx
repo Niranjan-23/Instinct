@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
-import websiteDevelopmentImg from '../assets/service/wesite development.webp';
+import websiteDevelopmentImg from '../assets/service/website development.png';
 import webApplicationImg from '../assets/service/web application.webp';
 import seoGeoImg from '../assets/service/seo&geo.webp';
 import uiUxVideo from '../assets/service/ui-ux.mp4';
@@ -19,11 +19,11 @@ function TiltWrapper({ children, className }) {
   const handleMouseMove = (e) => {
     const el = e.currentTarget;
     const rect = el.getBoundingClientRect();
-    
+
     // Normalize coordinates to range [-0.5, 0.5]
     const relativeX = (e.clientX - rect.left) / rect.width - 0.5;
     const relativeY = (e.clientY - rect.top) / rect.height - 0.5;
-    
+
     x.set(relativeX);
     y.set(relativeY);
   };
@@ -55,9 +55,9 @@ export default function Services() {
       desc: 'We engineer premium digital touchpoints that capture attention instantly. High-performance index rates, ultra-low loading speeds, and state-of-the-art interactive micro-animations combine to deliver an unforgettable user experience.',
       tech: ['React + Vite', 'Framer Motion', 'Tailwind CSS', 'Lenis Smooth Scroll'],
       mockup: (
-        <img 
-          src={websiteDevelopmentImg} 
-          alt="Website Development" 
+        <img
+          src={websiteDevelopmentImg}
+          alt="Website Development"
           className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
         />
       )
@@ -68,9 +68,9 @@ export default function Services() {
       desc: 'Transforming complex administrative, sales, or operation challenges into beautiful web architectures. We build workflows, automated dashboards, custom CRM tools, and scalable structures optimized for commercial operations.',
       tech: ['Database Design', 'Node.js Engine', 'Custom APIs', 'Dynamic Pipelines'],
       mockup: (
-        <img 
-          src={webApplicationImg} 
-          alt="Web Applications" 
+        <img
+          src={webApplicationImg}
+          alt="Web Applications"
           className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
         />
       )
@@ -81,9 +81,9 @@ export default function Services() {
       desc: 'Our modern approach to optimization ensures your product is visible exactly where it matters. We implement technical SEO foundations, automated schema markup, and advanced geographical search targets to ensure organic growth.',
       tech: ['Organic Visibility', 'GEO targeting', 'Schema Markup', 'Performance Indexing'],
       mockup: (
-        <img 
-          src={seoGeoImg} 
-          alt="SEO & GEO" 
+        <img
+          src={seoGeoImg}
+          alt="SEO & GEO"
           className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
         />
       )
@@ -94,12 +94,12 @@ export default function Services() {
       desc: 'Design is not just what it looks like, but how it works. We construct premium interfaces following modern spatial psychology, harmonized dark layouts, clean component spacing, and intuitive customer paths that convert.',
       tech: ['Figma Prototyping', 'Spatial Psychology', 'Design Token System', 'Component Architectures'],
       mockup: (
-        <video 
-          src={uiUxVideo} 
-          muted 
-          playsInline 
-          autoPlay 
-          loop 
+        <video
+          src={uiUxVideo}
+          muted
+          playsInline
+          autoPlay
+          loop
           preload="auto"
           className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
         />
@@ -111,9 +111,9 @@ export default function Services() {
       desc: 'Accelerate productivity and embed cognitive intelligence directly into your workflow. We specialize in fine-tuning Large Language Models, cognitive search indexation, multi-agent frameworks, and tailored automated pipelines.',
       tech: ['LLM Fine-tuning', 'Vector Databases', 'Autonomous Agents', 'Semantic Querying'],
       mockup: (
-        <img 
-          src={aiIntegrationImg} 
-          alt="AI Integration" 
+        <img
+          src={aiIntegrationImg}
+          alt="AI Integration"
           className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
         />
       )
@@ -126,11 +126,11 @@ export default function Services() {
       className="relative w-full py-24 md:py-32 bg-brand-bg text-brand-text overflow-hidden border-b border-brand-border transition-colors duration-500"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
-        
+
         {/* Section Header */}
         <div className="max-w-3xl mb-24 md:mb-32">
           <span className="text-xs uppercase tracking-[0.3em] text-brand-red font-semibold mb-3 block">
-            02 WHAT WE DELIVER
+            WHAT WE DELIVER
           </span>
           <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-brand-text mb-6 uppercase">
             SERVICES
@@ -145,15 +145,14 @@ export default function Services() {
           {servicesData.map((service, index) => {
             const isEven = index % 2 === 0;
             return (
-              <div 
+              <div
                 key={service.num}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
               >
                 {/* Text Block */}
-                <div 
-                  className={`lg:col-span-6 flex flex-col justify-center ${
-                    isEven ? 'lg:order-1' : 'lg:order-2'
-                  }`}
+                <div
+                  className={`lg:col-span-6 flex flex-col justify-center ${isEven ? 'lg:order-1' : 'lg:order-2'
+                    }`}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-2xl md:text-3xl font-bold font-mono text-brand-red">
@@ -176,7 +175,7 @@ export default function Services() {
                   {/* Tech Tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
                     {service.tech.map((tag) => (
-                      <span 
+                      <span
                         key={tag}
                         className="px-3.5 py-1.5 bg-brand-sec border border-brand-border rounded-full text-xs text-brand-text/70 font-medium transition-colors duration-500"
                       >
@@ -186,7 +185,7 @@ export default function Services() {
                   </div>
 
                   {/* Direct Link */}
-                  <a 
+                  <a
                     href="#contact"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-brand-text/80 hover:text-brand-red transition-colors duration-300 group self-start"
                   >
@@ -196,16 +195,15 @@ export default function Services() {
                 </div>
 
                 {/* Mockup Showcase Block with Tilt Response */}
-                <div 
-                  className={`lg:col-span-6 flex justify-center w-full ${
-                    isEven ? 'lg:order-2' : 'lg:order-1'
-                  }`}
+                <div
+                  className={`lg:col-span-6 flex justify-center w-full ${isEven ? 'lg:order-2' : 'lg:order-1'
+                    }`}
                 >
                   <TiltWrapper className="w-full max-w-lg md:max-w-xl transition-all duration-300">
                     <div className="relative group cursor-pointer">
                       {/* Ambient light glow behind mockup */}
                       <div className="absolute inset-0 bg-brand-red/5 rounded-3xl blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                      
+
                       {/* Mockup Frame Container */}
                       <div className="relative z-10 bg-brand-sec/40 border border-brand-border rounded-3xl p-3 md:p-4 shadow-xl dark:shadow-[0_30px_100px_rgba(0,0,0,0.8)] group-hover:border-brand-red/25 transition-all duration-500">
                         {/* Title Bar Details */}
