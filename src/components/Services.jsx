@@ -7,6 +7,7 @@ import webApplicationImg from '../assets/service/web application.webp';
 import seoGeoImg from '../assets/service/seo&geo.webp';
 import uiUxVideo from '../assets/service/ui-ux.mp4';
 import aiIntegrationImg from '../assets/service/ai-integration.webp';
+import digitalMarketingVideo from '../assets/service/Digitalmarketing.mp4';
 
 // Reusable Tilt Container component for premium cursor response
 function TiltWrapper({ children, className }) {
@@ -46,6 +47,8 @@ function TiltWrapper({ children, className }) {
     </motion.div>
   );
 }
+
+
 
 export default function Services() {
   const servicesData = [
@@ -114,6 +117,23 @@ export default function Services() {
         <img
           src={aiIntegrationImg}
           alt="AI Integration"
+          className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
+        />
+      )
+    },
+    {
+      num: '06',
+      title: 'Digital Marketing & Content Creation',
+      desc: 'We design high-impact digital narratives that drive action. Through conversion-focused ad campaigns, content scheduling architectures, and live social analytics tracking, we build systems that scale your brand presence organically.',
+      tech: ['Brand Architecture', 'Social Analytics', 'Conversion Funnels', 'Automated Campaigns'],
+      mockup: (
+        <video
+          src={digitalMarketingVideo}
+          muted
+          playsInline
+          autoPlay
+          loop
+          preload="auto"
           className="w-full h-[260px] md:h-[320px] object-cover rounded-2xl border border-brand-border"
         />
       )
