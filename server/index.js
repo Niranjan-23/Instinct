@@ -166,7 +166,7 @@ app.post('/api/submit-inquiry', async (req, res) => {
 });
 
 // Wildcard route to serve React's index.html for any frontend routes
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
