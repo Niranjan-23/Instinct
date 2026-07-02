@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Loader2, AlertCircle } from 'lucide-react';
+import { X, Loader2, AlertCircle, RotateCw } from 'lucide-react';
 
 export default function ProjectInquiryDrawer({ isOpen, onClose }) {
   const containerRef = useRef(null);
@@ -11,6 +11,11 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
   const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [captchaCode, setCaptchaCode] = useState('');
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaImage, setCaptchaImage] = useState('');
+  const [isLoadingCaptcha, setIsLoadingCaptcha] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Status and Validation states
   const [errors, setErrors] = useState({});
@@ -46,12 +51,42 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Disable background scrolling when open
+  const fetchCaptcha = async (isRefresh = false) => {
+    if (isRefresh) {
+      setIsRefreshing(true);
+    } else {
+      setIsLoadingCaptcha(true);
+    }
+    try {
+      const response = await fetch('/api/captcha');
+      const data = await response.json();
+      if (data.success) {
+        setCaptchaImage(data.image);
+        setCaptchaToken(data.token);
+        setCaptchaCode('');
+        if (errors.captchaCode) setErrors(prev => ({ ...prev, captchaCode: '' }));
+      } else {
+        console.error('Failed to load captcha:', data.message);
+      }
+    } catch (err) {
+      console.error('Error fetching captcha:', err);
+    } finally {
+      setIsLoadingCaptcha(false);
+      setIsRefreshing(false);
+    }
+  };
+
+  // Disable background scrolling when open and fetch captcha
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('drawer-open-lock');
+      fetchCaptcha();
     } else {
       document.body.classList.remove('drawer-open-lock');
+      setCaptchaCode('');
+      setCaptchaImage('');
+      setCaptchaToken('');
+      if (errors.captchaCode) setErrors(prev => ({ ...prev, captchaCode: '' }));
     }
     return () => {
       document.body.classList.remove('drawer-open-lock');
@@ -87,6 +122,12 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
     if (!subject.trim()) tempErrors.subject = 'Subject is required';
     if (!message.trim()) tempErrors.message = 'Message is required';
 
+    if (!captchaCode.trim()) {
+      tempErrors.captchaCode = 'Captcha code is required';
+    } else if (captchaCode.trim().length !== 4) {
+      tempErrors.captchaCode = 'Captcha code must be exactly 4 characters';
+    }
+
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
@@ -98,42 +139,35 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
     setIsSubmitting(true);
     setSubmitError(null);
 
-    const apiEndpoint = import.meta.env.VITE_SHEETS_API_URL;
-
-    // Check if the API URL is configured
-    if (!apiEndpoint || apiEndpoint.trim() === '') {
-      console.warn("Spreadsheet API URL not configured (VITE_SHEETS_API_URL is missing). Simulating submission in development mode.");
-      // Simulate premium submit delay
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-      }, 1500);
-      return;
-    }
-
     try {
-      await fetch(apiEndpoint, {
+      const response = await fetch('/api/submit-inquiry', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           name,
           email,
           phone,
           subject,
-          message
+          message,
+          captchaCode,
+          captchaToken
         })
       });
 
-      // Using 'no-cors' mode means the browser will not allow us to inspect the response
-      // status or body, but it guarantees the POST request was sent and processed by Google
-      // without being blocked by CORS. Since it did not throw a network exception, we mark it as submitted.
-      setIsSubmitted(true);
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+      } else {
+        setSubmitError(data.message || 'Submission failed. Please try again.');
+        fetchCaptcha(true); // Auto-refresh captcha on failure
+      }
     } catch (err) {
-      console.error('Spreadsheet submit error:', err);
+      console.error('Submission error:', err);
       setSubmitError('Failed to send message. Please check your network connection and try again.');
+      fetchCaptcha(true); // Auto-refresh captcha on failure
     } finally {
       setIsSubmitting(false);
     }
@@ -299,6 +333,60 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
                     placeholder="Tell me about your project context, timeline goals, and requirements..."
                   />
                   {errors.message && <span className="text-[10px] text-brand-red font-semibold block">{errors.message}</span>}
+                </div>
+
+                {/* Captcha Verification */}
+                <div className="space-y-1.5">
+                  <label className="text-[10px] uppercase font-bold tracking-wider text-brand-text/60 block">
+                    Security Verification *
+                  </label>
+                  <div className="flex gap-3 items-stretch">
+                    {/* Captcha Image */}
+                    <div className="relative flex-1 min-w-[140px] max-w-[160px] h-12 bg-brand-bg/60 border border-brand-border rounded-xl flex items-center justify-center overflow-hidden">
+                      {isLoadingCaptcha ? (
+                        <Loader2 className="w-5 h-5 animate-spin text-brand-text/30" />
+                      ) : captchaImage ? (
+                        <div
+                          className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:rounded-xl"
+                          dangerouslySetInnerHTML={{ __html: captchaImage }}
+                        />
+                      ) : (
+                        <span className="text-xs text-brand-text/30">Failed to load</span>
+                      )}
+                    </div>
+
+                    {/* Refresh Button */}
+                    <button
+                      type="button"
+                      disabled={isLoadingCaptcha || isSubmitting}
+                      onClick={() => fetchCaptcha(true)}
+                      className="px-3.5 border border-brand-border bg-brand-bg/30 text-brand-text/60 hover:text-brand-red hover:border-brand-red/30 rounded-xl hover:bg-brand-bg/60 transition-all duration-300 flex items-center justify-center cursor-pointer disabled:opacity-50"
+                      title="Refresh captcha"
+                    >
+                      <RotateCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                    </button>
+
+                    {/* Code Input */}
+                    <div className="flex-1 min-w-[100px]">
+                      <input
+                        type="text"
+                        maxLength={4}
+                        value={captchaCode}
+                        onChange={(e) => {
+                          setCaptchaCode(e.target.value.replace(/[^a-zA-Z0-9]/g, ''));
+                          if (errors.captchaCode) setErrors(prev => ({ ...prev, captchaCode: '' }));
+                        }}
+                        className={`w-full h-12 bg-brand-bg/60 border ${errors.captchaCode ? 'border-brand-red' : 'border-brand-border'} rounded-xl px-4 text-center text-sm font-mono tracking-widest text-brand-text focus:border-brand-red focus:outline-none transition-colors duration-300 shadow-inner uppercase`}
+                        placeholder="Code"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </div>
+                  {errors.captchaCode && (
+                    <span className="text-[10px] text-brand-red font-semibold block">
+                      {errors.captchaCode}
+                    </span>
+                  )}
                 </div>
 
                 {submitError && (
