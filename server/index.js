@@ -30,10 +30,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Serve static React build files
-const distPath = path.join(__dirname, '../dist');
-app.use(express.static(distPath));
-
 // Log incoming requests
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
@@ -165,9 +161,9 @@ app.post('/api/submit-inquiry', async (req, res) => {
   }
 });
 
-// Wildcard route to serve React's index.html for any frontend routes
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
+// Default root route
+app.get('/', (req, res) => {
+  res.send('Instinct Captcha API is active and running.');
 });
 
 // Start listening
