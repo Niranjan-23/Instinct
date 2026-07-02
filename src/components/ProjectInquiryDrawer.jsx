@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader2, AlertCircle, RotateCw } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 export default function ProjectInquiryDrawer({ isOpen, onClose }) {
   const containerRef = useRef(null);
 
@@ -58,7 +60,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
       setIsLoadingCaptcha(true);
     }
     try {
-      const response = await fetch('/api/captcha');
+      const response = await fetch(`${API_URL}/api/captcha`);
       const data = await response.json();
       if (data.success) {
         setCaptchaImage(data.image);
@@ -140,7 +142,7 @@ export default function ProjectInquiryDrawer({ isOpen, onClose }) {
     setSubmitError(null);
 
     try {
-      const response = await fetch('/api/submit-inquiry', {
+      const response = await fetch(`${API_URL}/api/submit-inquiry`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
